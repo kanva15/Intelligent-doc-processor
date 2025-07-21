@@ -32,6 +32,7 @@ An end-to-end serverless pipeline that automatically processes uploaded invoices
 
 ## 📁 Folder Structure
 
+```
 intelligent-doc-processor/
 ├── lambdas/ # All Lambda function source code
 ├── step-function-definition/ # JSON file for Step Function
@@ -39,7 +40,7 @@ intelligent-doc-processor/
 ├── screenshots/ # Execution proof: SNS, Step Function, DynamoDB, API
 ├── README.md
 └── .gitignore
-
+```
 
 ---
 
