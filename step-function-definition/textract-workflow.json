@@ -1,0 +1,37 @@
+{
+  "Comment": "Textract Document Processing",
+  "StartAt": "Start Textract Job",
+  "States": {
+    "Start Textract Job": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:354918408805:function:startTextractJob",
+      "Next": "Wait 10 Seconds"
+    },
+    "Wait 10 Seconds": {
+      "Type": "Wait",
+      "Seconds": 10,
+      "Next": "Check Job Status"
+    },
+    "Check Job Status": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:354918408805:function:checkTextractJobStatus",
+      "Next": "Job Complete?"
+    },
+    "Job Complete?": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.status",
+          "StringEquals": "SUCCEEDED",
+          "Next": "Process Textract Results"
+        }
+      ],
+      "Default": "Wait 10 Seconds"
+    },
+    "Process Textract Results": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:354918408805:function:parseTextractResults",
+      "End": true
+    }
+  }
+}
